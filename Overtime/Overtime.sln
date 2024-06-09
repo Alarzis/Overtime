@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34511.84
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Overtime", "Overtime\Overtime.csproj", "{37E916E4-370F-456E-8337-C3830E3016A7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Overtime.Tests", "Overtime.Tests\Overtime.Tests.csproj", "{D883F1C1-86B2-4BB4-B7E5-90F38C0C0BAB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{37E916E4-370F-456E-8337-C3830E3016A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37E916E4-370F-456E-8337-C3830E3016A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37E916E4-370F-456E-8337-C3830E3016A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37E916E4-370F-456E-8337-C3830E3016A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D883F1C1-86B2-4BB4-B7E5-90F38C0C0BAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D883F1C1-86B2-4BB4-B7E5-90F38C0C0BAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D883F1C1-86B2-4BB4-B7E5-90F38C0C0BAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D883F1C1-86B2-4BB4-B7E5-90F38C0C0BAB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4411663B-2725-443B-92FB-6A895129FE4A}
+	EndGlobalSection
+EndGlobal
