@@ -4,7 +4,7 @@
     {
         public override event HoursAddedDelegate HoursAdded;
 
-        private string fileName = null;
+        public string fileName = null;
 
         public Employee(string name, string surname)
             :base(name, surname)
@@ -12,57 +12,99 @@
             fileName = $"{name}_{surname}_overhours.txt";
         }
         
-        public override void AddHours(float hours)
+        public override void AddHours(float input)
         {
-            if (hours <= 2 && hours >=-2)
+            while (true)
             {
-                using (var writer = File.AppendText(fileName))
+
+                wrongamount:
+                Console.WriteLine($"Type in how many hours you want to add for {this.Name} {this.Surname}.");
+                Console.WriteLine("You can add from -2 to 2.");
+                Console.WriteLine("Or press Q to go back to previous menu.");
+                string hours = Console.ReadLine();
+
+                if (hours == "Q" || hours == "q")
                 {
-                    writer.WriteLine(hours);
+                    Console.Clear();
+                    break;
                 }
 
-                if (HoursAdded != null)
+                if(float.TryParse(hours, out float result))
                 {
-                    HoursAdded(this, new EventArgs());
+                    
+                }
+                else
+                {
+                    Console.Clear();
+                    Console.WriteLine($"Exception catched: This {hours} is not not good amount");
+                    Console.WriteLine();
+
+                    goto wrongamount;
+                }
+
+
+                try
+                {
+                    if (result <= 2 && result >= -2)
+                    {
+                        using (var writer = File.AppendText(fileName))
+                        {
+                            writer.WriteLine(result);
+                        }
+
+                        if (HoursAdded != null)
+                        {
+                            HoursAdded(this, new EventArgs());
+                        }
+                    }
+                    else
+                    {
+                        throw new Exception($"This {result} is not not good amount");
+                    }
+                }
+                catch (Exception e)
+                {
+                    
+                    Console.Clear();
+                    Console.WriteLine($"Exception catched: {e.Message}");
+                    Console.WriteLine();
                 }
             }
-            else
-            {
-                throw new Exception($"This {hours} is not not good amount");
-            }
+            
+            
         }
-
-        public override void AddHours(string hours)
+        
+        public override void AddHours(string input)
         {
-            if (float.TryParse(hours, out float result))
+            if (float.TryParse(input, out float result))
             {
                 AddHours(result);
             }
-            else if (char.TryParse(hours, out char result2))
+            else if (char.TryParse(input, out char result2))
             {
                 AddHours(result2);
             }
             else
             {
-                throw new Exception($"String {hours} is not float");
+                throw new Exception($"String {input} is not float");
             }
 
         }
-        public override void AddHours(double hours)
+        public override void AddHours(double input)
         {
-            var valueinfloat = (float)hours;
+            var valueinfloat = (float)input;
             AddHours(valueinfloat);
         }
 
-        public override void AddHours(int hours)
+        public override void AddHours(int input)
         {
-            var valueinfloat = (float)hours;
+            var valueinfloat = (float)input;
             AddHours(valueinfloat);
         }
 
-        public override void AddHours(char hours)
+        public override void AddHours(char input)
         {
-            var valueinfloat = (float)hours;
+            var valueinfloat = (float)input;
             AddHours(valueinfloat);
         }
 

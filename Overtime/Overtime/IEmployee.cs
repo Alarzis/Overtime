@@ -21,5 +21,6 @@ namespace Overtime
         event HoursAddedDelegate HoursAdded;
 
         Statistics GetStatistics();
+
     }
 }

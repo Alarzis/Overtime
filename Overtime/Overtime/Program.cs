@@ -16,6 +16,7 @@ employee3.HoursAdded += EmployeeHoursAdded;
 
 void EmployeeHoursAdded(object sender, EventArgs args)
 {
+    Console.Clear();
     Console.WriteLine("Hours have been added");
     Console.WriteLine();
 }
@@ -31,107 +32,51 @@ while (true)
     Console.WriteLine("Press Q to quit.");
     Console.WriteLine("Then press enter to confirm.");
 
-    string input1 = Console.ReadLine();
+    string input = Console.ReadLine();
     Console.Clear();
-    if (input1 == "Q" || input1 == "q")
+    if (input == "Q" || input == "q")
     {
         break;
     }
-    switch (input1)
+    switch (input)
     {
         case "1":
-            while (true)
-            {
-                Console.WriteLine("Type in how many hours you want to add for " + employee1.Name + " " + employee1.Surname);
-                Console.WriteLine("You can add from -2 to 2.");
-                Console.WriteLine("Or press Q to go back to previous menu.");
-                string input2 = Console.ReadLine();
-                if (input2 == "Q" || input2 == "q")
-                {
-                    Console.Clear();
-                    break;
-                }
-                try
-                {
-                    Console.Clear();
-                    employee1.AddHours(input2);
-                }
-                catch (Exception e)
-                {
-                    Console.Clear();
-                    Console.WriteLine($"Exception catched: {e.Message}");
-                }
-            }
+            employee1.AddHours(input);
             break;
         case "2":
-            while (true)
-            {
-                Console.WriteLine("Type in how many hours you want to add for " + employee2.Name + " " + employee2.Surname);
-                Console.WriteLine("You can add from -2 to 2.");
-                Console.WriteLine("Or press Q to go back to previous menu.");
-                string input2 = Console.ReadLine();
-                if (input2 == "Q" || input2 == "q")
-                {
-                    Console.Clear();
-                    break;
-                }
-                try
-                {
-                    Console.Clear();
-                    employee2.AddHours(input2);
-                }
-                catch (Exception e)
-                {
-                    Console.Clear();
-                    Console.WriteLine($"Exception catched: {e.Message}");
-                }
-            }
+            employee2.AddHours(input);
             break;
         case "3":
-            while (true)
-            {
-                Console.WriteLine("Type in how many hours you want to add for " + employee3.Name + " " + employee3.Surname);
-                Console.WriteLine("You can add from -2 to 2.");
-                Console.WriteLine("Or press Q to go back to previous menu.");
-                string input2 = Console.ReadLine();
-                if (input2 == "Q" || input2 == "q")
-                {
-                    Console.Clear();
-                    break;
-                }
-                try
-                {
-                    Console.Clear();
-                    employee3.AddHours(input2);
-                }
-                catch (Exception e)
-                {
-                    Console.Clear();
-                    Console.WriteLine($"Exception catched: {e.Message}");
-                }
-            }
+            employee3.AddHours(input);
             break;
         case "4":
             var statistics1 = employee1.GetStatistics();
             var statistics2 = employee2.GetStatistics();
             var statistics3 = employee3.GetStatistics();
+            float totalhours = 0;
+            int count = 0;
 
-            var max = float.MinValue;
-            var min = float.MaxValue;
-            var totalhours = statistics1.Sum + statistics2.Sum + statistics3.Sum;
-            var averagehours = totalhours / 3;
+            if (File.Exists("Statistics_Total_Sum.txt"))
+            {
 
-            max = Math.Max(max, statistics1.Sum);
-            max = Math.Max(max, statistics2.Sum);
-            max = Math.Max(max, statistics3.Sum);
+                using (var reader = File.OpenText("Statistics_Total_Sum.txt"))
+                {
+                    var line = reader.ReadLine();
 
-            min = Math.Min(min, statistics1.Sum);
-            min = Math.Min(min, statistics2.Sum);
-            min = Math.Min(min, statistics3.Sum); 
+                    while (line != null)
+                    {
+                        var number = float.Parse(line);
+                        totalhours += number;
+                        count++;
+                        line = reader.ReadLine();
+                    }
+                }
+            }
             
+            float averagehours = totalhours / 3;
+
             Console.Clear();
-            Console.WriteLine($"Highest overtime hours is {max}.");
-            Console.WriteLine($"Lowest overtime hours is {min}.");
+            Console.WriteLine("Here are the overhours of our employees:");
             Console.WriteLine();
             Console.WriteLine($"1.{employee1.Name} {employee1.Surname}:");
             Console.WriteLine($"Hours were added {statistics1.Count} times.");
@@ -146,6 +91,7 @@ while (true)
             Console.WriteLine($"Total overhours: {statistics3.Sum}.");
             Console.WriteLine();
             Console.WriteLine($"All of our employees have {totalhours} hours.");
+            Console.WriteLine($"In total hours were added {count} times.");
             Console.WriteLine($"With average overhours: {averagehours}");
             Console.WriteLine();
             Console.WriteLine("Press enter to go back to previous Menu");
@@ -154,7 +100,8 @@ while (true)
             break;
         default:
             Console.Clear();
-            Console.WriteLine($"Exception catched: {input1} is not good choice. Please try again.");
+            Console.WriteLine($"Exception catched: {input} is not good choice. Please try again.");
+            Console.WriteLine();
             break;
     }
 }
