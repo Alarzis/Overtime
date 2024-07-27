@@ -18,6 +18,8 @@ namespace Overtime
 
         void AddHours(char hours);
 
+        void GetHours(string hours);
+
         event HoursAddedDelegate HoursAdded;
 
         Statistics GetStatistics();

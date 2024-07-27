@@ -15,7 +15,7 @@
             }
 
             // arrange
-            var employee = new EmployeeTest("Bartek", "Kolos");
+            var employee = new Employee("Bartek", "Kolos");
             employee.AddHours(1);
             employee.AddHours(2);
             employee.AddHours(2);
@@ -42,7 +42,7 @@
             }
 
             //arrange
-           var employee = new EmployeeTest("Zuzia", "Kredka");
+           var employee = new Employee("Zuzia", "Kredka");
             employee.AddHours(-1);
             employee.AddHours(-2);
             employee.AddHours(2);
@@ -81,8 +81,8 @@
             }
 
             // arrange
-            var employee1 = new EmployeeTest("Szymon", "Kufel");
-            var employee2 = new EmployeeTest("Stefan", "Bombel");
+            var employee1 = new Employee("Szymon", "Kufel");
+            var employee2 = new Employee("Stefan", "Bombel");
             employee1.AddHours(1);
             employee1.AddHours(2);
             employee2.AddHours(2);

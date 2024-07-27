@@ -26,6 +26,8 @@
 
         public abstract void AddHours(char hours);
 
+        public abstract void GetHours(string hours);
+
         public abstract Statistics GetStatistics();
 
 

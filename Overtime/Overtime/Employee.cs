@@ -11,67 +11,57 @@
         {
             fileName = $"{name}_{surname}_overhours.txt";
         }
-        
-        public override void AddHours(float input)
+
+        public override void GetHours(string hours)
         {
             while (true)
             {
-
-                wrongamount:
                 Console.WriteLine($"Type in how many hours you want to add for {this.Name} {this.Surname}.");
                 Console.WriteLine("You can add from -2 to 2.");
                 Console.WriteLine("Or press Q to go back to previous menu.");
-                string hours = Console.ReadLine();
+                string input = Console.ReadLine();
 
-                if (hours == "Q" || hours == "q")
+                if (input == "Q" || input == "q")
                 {
                     Console.Clear();
                     break;
                 }
-
-                if(float.TryParse(hours, out float result))
+                if (float.TryParse(input, out float result))
                 {
-                    
+                    AddHours(result);
+                }
+                else if (char.TryParse(input, out char result2))
+                {
+                    AddHours(result2);
                 }
                 else
                 {
                     Console.Clear();
-                    Console.WriteLine($"Exception catched: This {hours} is not not good amount");
-                    Console.WriteLine();
-
-                    goto wrongamount;
-                }
-
-
-                try
-                {
-                    if (result <= 2 && result >= -2)
-                    {
-                        using (var writer = File.AppendText(fileName))
-                        {
-                            writer.WriteLine(result);
-                        }
-
-                        if (HoursAdded != null)
-                        {
-                            HoursAdded(this, new EventArgs());
-                        }
-                    }
-                    else
-                    {
-                        throw new Exception($"This {result} is not not good amount");
-                    }
-                }
-                catch (Exception e)
-                {
-                    
-                    Console.Clear();
-                    Console.WriteLine($"Exception catched: {e.Message}");
-                    Console.WriteLine();
+                    Console.WriteLine($"This {input} is not not good amount");
                 }
             }
             
-            
+        }
+
+        public override void AddHours(float input)
+        {
+            if (input <= 2 && input >= -2)
+            {
+                using (var writer = File.AppendText(fileName))
+                {
+                    writer.WriteLine(input);
+                }
+
+                if (HoursAdded != null)
+                {
+                    HoursAdded(this, new EventArgs());
+                }
+            }
+            else
+            {
+                Console.Clear();
+                Console.WriteLine($"This {input} is not not good amount");
+            }
         }
         
         public override void AddHours(string input)
