@@ -14,10 +14,19 @@ employee1.HoursAdded += EmployeeHoursAdded;
 employee2.HoursAdded += EmployeeHoursAdded;
 employee3.HoursAdded += EmployeeHoursAdded;
 
+
 void EmployeeHoursAdded(object sender, EventArgs args)
 {
     Console.Clear();
     Console.WriteLine("Hours have been added");
+    Console.WriteLine();
+}
+
+static void WriteEmployeeHours(Employee employee, Statistics statistics)
+{
+    Console.WriteLine($"1.{employee.Name} {employee.Surname}:");
+    Console.WriteLine($"Hours were added {statistics.Count} times.");
+    Console.WriteLine($"Total overhours: {statistics.Sum}.");
     Console.WriteLine();
 }
 
@@ -78,18 +87,11 @@ while (true)
             Console.Clear();
             Console.WriteLine("Here are the overhours of our employees:");
             Console.WriteLine();
-            Console.WriteLine($"1.{employee1.Name} {employee1.Surname}:");
-            Console.WriteLine($"Hours were added {statistics1.Count} times.");
-            Console.WriteLine($"Total overhours: {statistics1.Sum}.");
-            Console.WriteLine();
-            Console.WriteLine($"2.{employee2.Name} {employee2.Surname}:");
-            Console.WriteLine($"Hours were added {statistics2.Count} times.");
-            Console.WriteLine($"Total overhours: {statistics2.Sum}.");
-            Console.WriteLine();
-            Console.WriteLine($"3.{employee3.Name} {employee3.Surname}:");
-            Console.WriteLine($"Hours were added {statistics3.Count} times.");
-            Console.WriteLine($"Total overhours: {statistics3.Sum}.");
-            Console.WriteLine();
+
+            WriteEmployeeHours(employee1, statistics1);
+            WriteEmployeeHours(employee2, statistics2);
+            WriteEmployeeHours(employee3, statistics3);
+
             Console.WriteLine($"All of our employees have {totalhours} hours.");
             Console.WriteLine($"In total hours were added {count} times.");
             Console.WriteLine($"With average overhours: {averagehours}");
